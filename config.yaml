@@ -1,0 +1,64 @@
+config:
+  backup: true
+  create: true
+  dotpath: dotfiles
+dotfiles:
+  f_zshrc:
+    src: zshrc
+    dst: ~/.zshrc
+  f_zshenv:
+    src: zshenv
+    dst: ~/.zshenv
+  f_xinitrc:
+    src: xinitrc
+    dst: ~/.xinitrc
+  f_xsession:
+    src: xsession
+    dst: ~/.xsession
+  d_awesome:
+    src: config/awesome
+    dst: ~/.config/awesome
+  d_awesome_config:
+    src: config/awesome_config
+    dst: ~/.config/awesome_config
+  d_kitty:
+    src: config/kitty
+    dst: ~/.config/kitty
+  d_nvim:
+    src: config/nvim
+    dst: ~/.config/nvim
+  d_compton:
+    src: config/compton
+    dst: ~/.config/compton
+  d_mopidy:
+    src: config/mopidy
+    dst: ~/.config/mopidy
+  d_ncmpcpp:
+    src: config/ncmpcpp
+    dst: ~/.config/ncmpcpp
+  d_ncspot:
+    src: config/ncspot
+    dst: ~/.config/ncspot
+  d_xorg.conf.d:
+    src: etc/X11/xorg.conf.d
+    dst: /etc/X11/xorg.conf.d
+  f_bashrc:
+    src: bashrc
+    dst: ~/.bashrc
+profiles:
+  erandil-x220:
+    dotfiles:
+    - f_zshrc
+    - f_zshenv
+    - f_xinitrc
+    - f_xsession
+    - d_awesome
+    - d_awesome_config
+    - d_kitty
+    - d_nvim
+    - d_compton
+    - d_mopidy
+    - d_ncmpcpp
+    - d_ncspot
+    - d_xorg.conf.d
+    - f_bashrc

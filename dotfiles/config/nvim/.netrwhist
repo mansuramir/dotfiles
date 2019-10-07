@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/home/mansur/.config/awesome/themes/blackburn'
+let g:netrw_dirhist_6='/home/mansur/.config/awesome/themes'
+let g:netrw_dirhist_5='/home/mansur/.config/awesome'
+let g:netrw_dirhist_4='/home/mansur/.config'
+let g:netrw_dirhist_3='/home/mansur'
+let g:netrw_dirhist_2='/home/mansur/.config'
+let g:netrw_dirhist_1='/home/mansur/.config/nvim'

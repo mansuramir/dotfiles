@@ -1,0 +1,5 @@
+export LANG=en_SG.UTF-8
+export LC_ALL=en_SG.UTF-8
+
+xscreensaver -no-splash &
+exec awesome
