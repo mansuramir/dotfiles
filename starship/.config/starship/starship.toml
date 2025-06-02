@@ -76,7 +76,8 @@ format = "[$symbol$version]($style) "
 style = "bold green"
 
 [time]
-time_format = "%T"
+#time_format = "%-d %b, %l:%M %p"
+time_format = "%l:%M %p"
 format = "🕙 $time($style) "
 style = "bright-white"
 disabled = false
