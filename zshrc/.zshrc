@@ -1,9 +1,22 @@
+platform='unknown'
+unamestr=$(uname)
+if [[ "$unamestr" == 'Linux' ]]; then
+   platform='linux'
+elif [[ "$unamestr" == 'Darwin' ]]; then
+    platform='macos'
+elif [[ "$unamestr" == 'FreeBSD' ]]; then
+   platform='freebsd'
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 disable r ## to enable calling R language from the command line
 
-alias bupd="brew update && brew upgrade && brew cleanup"
+if [[ $platform == 'macos' ]]; then
+    alias bupd="brew update && brew upgrade && brew cleanup"
+fi
+
 export BAT_THEME="Dracula"
 
 # Path to your oh-my-zsh installation.
@@ -17,8 +30,15 @@ export BAT_THEME="Dracula"
 
 ## ZSH autocomplete, autosuggestions, syntax highlighting
 #source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ $platform == 'macos' ]]; then
+    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source /opt/homebrew/share/zsh/site-functions
+elif [[ $platform == 'linux' ]]; then
+    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source /usr/share/zsh/site-functions
+fi
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -70,7 +90,7 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy/mm/dd"
 HISTSIZE=5000               # how many lines of history to keep in memory
 HISTFILE=~/.zsh_history     # where to save history to disk
 SAVEHIST=5000               # number of history entries to save to disk
@@ -92,16 +112,18 @@ bindkey '\e[B' history-search-forward
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew macos colored-man-pages golang python)
-
-#source $ZSH/oh-my-zsh.sh
+if [[ $platform == 'macos' ]]; then
+    plugins=(git brew macos colored-man-pages golang python)
+elif [[ $platform == 'linux' ]]; then
+    plugins=(git brew colored-man-pages golang python)
+fi
 
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_GB.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -113,21 +135,12 @@ plugins=(git brew macos colored-man-pages golang python)
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-[ -f "/Users/mansuramir/.ghcup/env" ] && source "/Users/mansuramir/.ghcup/env" # ghcup-env
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
 # opam configuration
-[[ ! -r /Users/mansuramir/.opam/opam-init/init.zsh ]] || source /Users/mansuramir/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+[[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
 # Java openjdk
 jdk() {
@@ -152,10 +165,10 @@ hxs() {
 	[[ "$files" ]] && hx --vsplit $(echo $files | tr \\0 " ")
 }
 
-export PATH=~/.local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 
 # bun completions
-[ -s "/Users/mansuramir/.bun/_bun" ] && source "/Users/mansuramir/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -166,37 +179,26 @@ export MANPATH=/opt/local/share/man:$MANPATH
 export DISPLAY=:0.0
 
 
-source /opt/homebrew/share/zsh/site-functions
+
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
-[ -f "/Users/mansuramir/.ghcup/env" ] && source "/Users/mansuramir/.ghcup/env" # ghcup-env
-
-## Modular Mojo ##
-## Mojo's Python virtual environment created at /Users/mansuramir/.modular/pkg/packages.modular.com_mojo/venv
-export MODULAR_HOME="/Users/mansuramir/.modular"
-export PATH="/Users/mansuramir/.modular/pkg/packages.modular.com_mojo/bin:$PATH"  ## Add Mojo's path in front of $PATH
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
 
 ### POSTGRESQL 16 ###
 #If you need to have postgresql@15 first in your PATH, run:
-export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+if [[ $platform == 'macos' ]]; then
+    export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 
-#For compilers to find postgresql@16 you may need to set:
-export LDFLAGS="-L/opt/homebrew/opt/postgresql@16/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/postgresql@16/include"
+    #For compilers to find postgresql@16 you may need to set:
+    export LDFLAGS="-L/opt/homebrew/opt/postgresql@16/lib"
+    export CPPFLAGS="-I/opt/homebrew/opt/postgresql@16/include"
+fi
 
-
-### ROC NIGHTLY ###
-export PATH="$HOME/.local/roc_nightly:$HOME/Code/Admiran/bin:$PATH"
-export PATH="$PATH:/Users/mansuramir/.modular/bin"
 
 ### HELIX ####
-export HELIX_RUNTIME=$HOME/.local/helix/runtimei
+export HELIX_RUNTIME=$HOME/.local/helix/runtime
 
 #### Starship
 eval "$(starship init zsh)"
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
-
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$PATH
-export PATH=$PATH:/Applications/Xcode.app/Contents/Developer/usr/bin
+export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
