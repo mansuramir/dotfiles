@@ -31,7 +31,7 @@ fi
 
 disable r ## to enable calling R language from the command line
 
-c
+if [[ $platform == 'macos' ]]; then
     alias bupd="brew update && brew upgrade && brew cleanup"
 fi
 
