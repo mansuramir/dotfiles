@@ -3,6 +3,9 @@
 # .zshenv: Zsh environment file, loaded always.
 #
 
+export LANG="en_GB.UTF-8"
+export LC_ALL="en_GB.UTF-8"
+
 export ZDOTDIR=${ZDOTDIR:-$HOME/.config/zsh}
 
 # XDG
