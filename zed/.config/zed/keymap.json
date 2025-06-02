@@ -1,0 +1,51 @@
+[
+  {
+    // normal & visual mode
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {}
+  },
+  {
+    // normal mode
+    "context": "Editor && vim_mode == normal && (vim_operator == none || vim_operator == n) && !VimWaiting",
+    "bindings": {
+      "g d": "editor::GoToDefinition",
+      "space space": "command_palette::Toggle",
+      "space b d": "pane::CloseActiveItem",
+      "space b n": "pane::ActivateNextItem",
+      "space b p": "pane::ActivatePreviousItem",
+      "space c l": "editor::ToggleComments",
+      "space f s": "workspace::Save",
+      "space f S": "workspace::SaveAll",
+      "space j f": "project_symbols::Toggle", // not quite right, since it's full project
+      //"space p s": "TODO", // go to project
+      "space q a": "pane::CloseAllItems",
+      "space q o": "pane::CloseInactiveItems",
+      "space q w": "workspace::CloseWindow",
+      "space q q": "zed::Quit",
+      "space s d": "pane::SplitDown",
+      "space s l": "pane::SplitLeft",
+      "space s r": "pane::SplitRight",
+      "space s u": "pane::SplitUp",
+      "space t i": "editor::ToggleInlayHints",
+      "space t n": "workspace::NewTerminal",
+      "space t t": "terminal_panel::ToggleFocus",
+      "space w d": "workspace::ActivatePaneDown",
+      "space w l": "workspace::ActivatePaneLeft",
+      "space w r": "workspace::ActivatePaneRight",
+      "space w u": "workspace::ActivatePaneUp",
+      "space w w": "workspace::ActivateNextPane"
+    }
+  },
+  {
+    // visual, visual line & visual block modes
+    "context": "Editor && vim_mode == visual && !VimWaiting && !VimObject",
+    "bindings": {}
+  },
+  {
+    // insert mode
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "j k": "vim::NormalBefore"
+    }
+  }
+]
