@@ -196,3 +196,7 @@ export HELIX_RUNTIME=$HOME/.local/helix/runtimei
 #### Starship
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
+
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH
+export PATH=$PATH:/Applications/Xcode.app/Contents/Developer/usr/bin
