@@ -7,13 +7,13 @@ alias bupd="brew update && brew upgrade && brew cleanup"
 export BAT_THEME="Dracula"
 
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+#export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="aussiegeek"
+#ZSH_THEME="aussiegeek"
 
 ## ZSH autocomplete, autosuggestions, syntax highlighting
 #source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
@@ -94,7 +94,7 @@ bindkey '\e[B' history-search-forward
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git brew macos colored-man-pages golang python)
 
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -189,3 +189,10 @@ export CPPFLAGS="-I/opt/homebrew/opt/postgresql@16/include"
 ### ROC NIGHTLY ###
 export PATH="$HOME/.local/roc_nightly:$HOME/Code/Admiran/bin:$PATH"
 export PATH="$PATH:/Users/mansuramir/.modular/bin"
+
+### HELIX ####
+export HELIX_RUNTIME=$HOME/.local/helix/runtimei
+
+#### Starship
+eval "$(starship init zsh)"
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
