@@ -35,8 +35,8 @@ if [[ $platform == 'macos' ]]; then
     source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     #source /opt/homebrew/share/zsh/site-functions
 elif [[ $platform == 'linux' ]]; then
-    source /usr/share/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-    source /usr/share/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     #source /usr/share/zsh/site-functions
 fi
 
