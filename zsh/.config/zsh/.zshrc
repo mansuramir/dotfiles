@@ -1,4 +1,11 @@
+#!/bin/zsh
+#
+# .zshrc - Run on interactive Zsh session.
+#
+
+### os and platform identification
 platform='unknown'
+linux_distro='unknown'
 unamestr=$(uname)
 if [[ "$unamestr" == 'Linux' ]]; then
    platform='linux'
@@ -8,12 +15,23 @@ elif [[ "$unamestr" == 'FreeBSD' ]]; then
    platform='freebsd'
 fi
 
+if [[ $platform == 'linux' ]]; then
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        if [[ "${ID}" == 'arch' ]]; then
+            linux_distro='arch'
+        elif [["${ID}" == "fedora*" ]]; then
+            linux_distro='fedora'
+        fi
+    fi
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 disable r ## to enable calling R language from the command line
 
-if [[ $platform == 'macos' ]]; then
+c
     alias bupd="brew update && brew upgrade && brew cleanup"
 fi
 
@@ -30,15 +48,21 @@ export BAT_THEME="Dracula"
 
 ## ZSH autocomplete, autosuggestions, syntax highlighting
 #source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+## ZSH autocomplete, autosuggestions, syntax highlighting
 if [[ $platform == 'macos' ]]; then
     source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     #source /opt/homebrew/share/zsh/site-functions
-elif [[ $platform == 'linux' ]]; then
+elif [[ $linux_distro == 'fedora' ]]; then
+    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    #source /opt/homebrew/share/zsh/site-functions
+elif [[ $linux_distro == 'arch' ]]; then
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     #source /usr/share/zsh/site-functions
 fi
+
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
