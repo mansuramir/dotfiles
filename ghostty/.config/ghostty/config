@@ -23,6 +23,7 @@ link-url                       = true
 mouse-hide-while-typing        = true
 theme                          = dark:catppuccin-mocha,light:catppuccin-mocha
 window-vsync                   = true
+background-opacity             = 0.95
 
 # Other
 clipboard-paste-protection     = true
