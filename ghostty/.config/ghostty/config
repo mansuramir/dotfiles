@@ -12,6 +12,9 @@ font-feature                   = ss13
 
 font-size                      = 12
 window-inherit-font-size       = true
+window-width		       = 155
+window-height 		       = 43
+quit-after-last-window-closed  = true
 
 # Look and Feel
 adjust-cursor-thickness        = 3
