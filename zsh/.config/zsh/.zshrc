@@ -5,6 +5,7 @@
 
 ### os and platform identification
 platform='unknown'
+macosarch='unknown'
 linux_distro='unknown'
 unamestr=$(uname)
 if [[ "$unamestr" == 'Linux' ]]; then
@@ -14,6 +15,15 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
     export HOSTOS="macos"
 elif [[ "$unamestr" == 'FreeBSD' ]]; then
    platform='freebsd'
+fi
+
+if [[ $platform == 'macos' ]]; then
+    macosarch=$(uname -m)
+    if [[ "$macosarch" == 'arm64' ]]; then
+        macosarch='applesilicon'
+    elif [[ "$macosarch" == 'x86_64' ]]; then
+        macosarch='intel'
+    fi
 fi
 
 if [[ $platform == 'linux' ]]; then
@@ -47,9 +57,13 @@ export BAT_THEME="Dracula"
 ## ZSH autocomplete, autosuggestions, syntax highlighting
 #source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 ## ZSH autocomplete, autosuggestions, syntax highlighting
-if [[ $platform == 'macos' ]]; then
+if [[ $macosarch == 'applesilicon' ]]; then
     source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    #source /opt/homebrew/share/zsh/site-functions
+elif [[ $macosarch == 'intel' ]]; then
+    source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     #source /opt/homebrew/share/zsh/site-functions
 elif [[ $linux_distro == 'fedora' ]]; then
     source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
