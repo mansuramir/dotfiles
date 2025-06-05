@@ -60,7 +60,7 @@ export BAT_THEME="Dracula"
 if [[ $macosarch == 'applesilicon' ]]; then
     source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    #source /opt/homebrew/share/zsh/site-functions
+    source /opt/homebrew/share/zsh/site-functions
 elif [[ $macosarch == 'intel' ]]; then
     source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -72,7 +72,7 @@ elif [[ $linux_distro == 'fedora' ]]; then
 elif [[ $linux_distro == 'arch' ]]; then
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    #source /usr/share/zsh/site-functions
+    source /usr/share/zsh/site-functions
 fi
 
 
