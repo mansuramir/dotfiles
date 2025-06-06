@@ -192,4 +192,4 @@ eval "$(starship init zsh)"
 
 
 #### git aliases
-alias itchk="git fetch --dry-run --verbose"
+alias gitchk="git fetch --dry-run --verbose"
