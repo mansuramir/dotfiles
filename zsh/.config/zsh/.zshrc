@@ -187,5 +187,9 @@ export PATH=$HOME.local/bin:$HOME/.go/bin:$PATH
 export HELIX_RUNTIME=$HOME/.local/helix/runtime
 
 #### Starship
-eval "$(starship init zsh)"
 export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
+eval "$(starship init zsh)"
+
+
+#### git aliases
+gitchk="git fetch --dry-run --verbose"
