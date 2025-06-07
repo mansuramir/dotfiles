@@ -193,3 +193,6 @@ eval "$(starship init zsh)"
 
 #### git aliases
 alias gitchk="git fetch --dry-run --verbose"
+
+### ROC Nightly
+export PATH=$PATH:$HOME/.local/share/roc/roc_nightly
