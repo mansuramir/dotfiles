@@ -191,8 +191,10 @@ export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
 eval "$(starship init zsh)"
 
 
-#### git aliases
-alias gitchk="git fetch --dry-run --verbose"
 
 ### ROC Nightly
 export PATH=$PATH:$HOME/.local/share/roc/roc_nightly
+
+
+### include alias file
+source $HOME/.config/zsh/.zshalias
