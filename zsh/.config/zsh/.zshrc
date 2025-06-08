@@ -32,8 +32,9 @@ if [[ $platform == 'linux' ]]; then
         if [[ "${ID}" == 'arch' ]]; then
             linux_distro='arch'
 	    export HOSTOS="linuxarch"
-        elif [["${ID}" == "fedora*" ]]; then
-            linux_distro='fedora'
+        #elif [["${ID}" == "fedora*" ]]; then
+        else
+	    linux_distro='fedora'
 	    export HOSTOS="linuxfedora"
         fi
     fi
