@@ -29,13 +29,13 @@ fi
 if [[ $platform == 'linux' ]]; then
     if [ -f /etc/os-release ]; then
         . /etc/os-release
-        if [[ "${ID}" == 'arch' ]]; then
+        if [[ "${ID}" == 'arch' ]] || [[ "${ID}" == 'endeavouros' ]]; then
             linux_distro='arch'
-	    export HOSTOS="linuxarch"
+            export HOSTOS="linuxarch"
         #elif [["${ID}" == "fedora*" ]]; then
         else
-	    linux_distro='fedora'
-	    export HOSTOS="linuxfedora"
+            linux_distro='fedora'
+            export HOSTOS="linuxfedora"
         fi
     fi
 fi
