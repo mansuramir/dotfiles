@@ -17,3 +17,7 @@ alias cls=clear
 
 #### git aliases
 alias gitchk="git fetch --dry-run --verbose"
+
+### yay
+alias yup="yay --noconfirm -Syyuu"
+alias yin="yay --noconfirm -S"
