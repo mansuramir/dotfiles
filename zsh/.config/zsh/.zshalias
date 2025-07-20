@@ -19,6 +19,9 @@ alias cls=clear
 alias gitck="git fetch --dry-run --verbose"
 alias gitpl="git pull"
 alias gitph="git push"
+alias gitcm="git commit -m"
+alias gitst="git status"
+alias gitad="git add ."
 
 ### yay
 alias yup="yay --noconfirm -Syyuu"
