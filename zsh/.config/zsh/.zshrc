@@ -49,7 +49,7 @@ if [[ $platform == 'macos' ]]; then
     alias bupd="brew update && brew upgrade && brew cleanup"
 fi
 if [[ $platform == 'linux' ]]; then
-    alias hx=helix
+    ##alias hx=helix
     alias zed=zeditor
 fi
 
