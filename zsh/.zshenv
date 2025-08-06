@@ -33,3 +33,4 @@ export XDG_PROJECTS_DIR=${XDG_PROJECTS_DIR:-$HOME/Projects}
 if [[ "$OSTYPE" == darwin* ]]; then
   export SHELL_SESSIONS_DISABLE=1
 fi
+. "/Users/mansuramir/.getada/env.sh"
