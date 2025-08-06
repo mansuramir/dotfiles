@@ -36,3 +36,4 @@ fi
 
 ## ADA config
 . "$HOME/.getada/env.sh"
+export PATH=$PATH:$HOME/.alire/bin
