@@ -35,5 +35,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
 fi
 
 ## ADA config
-. "$HOME/.getada/env.sh"
-export PATH=$PATH:$HOME/.alire/bin
+if [ -f "$HOME/.getada/env.sh" ]; then
+	. "$HOME/.getada/env.sh"
+	export PATH=$PATH:$HOME/.alire/bin
+fi
