@@ -1,0 +1,13 @@
+# vim ~/.Xresources
+(...)
+! ~/scripts/termbar inside xterm(1) 
+termbar*faceName: CodeNewRoman Nerd Font:style=Bold:size=13 
+termbar*geometry: 191x1+0+0 
+termbar*internalBorder: 6 
+termbar*saveLines: 0 
+termbar*scrollBar: false 
+termbar*title: termbar 
+termbar*foreground: qogir_white 
+termbar*background: qogir_black 
+termbar*color1: qogir_red 
+termbar*color3: qogir_orange
