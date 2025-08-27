@@ -1,0 +1,4 @@
+command kitty "kitty"
+
+
+bind-key CM-Return "kitty"
