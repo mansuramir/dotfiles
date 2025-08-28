@@ -1,0 +1,5 @@
+join chioque@unifi wpakey 55412800
+inet autoconf
+
+join INGRESS_5G wpakey Ing5g@1234
+inet autoconf
