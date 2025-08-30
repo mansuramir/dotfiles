@@ -51,7 +51,7 @@ separator-foreground = ${colors.disabled}
 font-0 = monospace;2
 
 modules-left = xworkspaces xwindow
-modules-right = openbsdbattery sndio memory cpu openbsdtemp date
+modules-right = openbsdbattery pulseaudio memory cpu openbsdtemp date
 ;filesystem pulseaudio xkeyboard memory cpu wlan eth date
 
 cursor-click = pointer
@@ -71,25 +71,15 @@ type = custom/script
 exec = $HOME/.config/polybar/script/getbattlevel.sh
 label = %output%%
 interval = 60
-format-prefix = "BAT "
-format-prefix-foreground = ${colors.primary}
+;format-prefix = "BAT "
 
 [module/openbsdtemp]
 type = custom/script
 exec = $HOME/.config/polybar/script/getcputemp.sh
 ;sysctl -n hw.sensors.cpu0.temp0 | cut -f 1 -d "."
-label = %output%°C
+label = %output%C
 interval = 30
-format-prefix = "TEMP "
-format-prefix-foreground = ${colors.primary}
-
-[module/sndio]
-type = custom/script
-exec = $HOME/.config/polybar/script/volume.sh
-label = %output%%
-interval = 10
-format-prefix = "VOL "
-format-prefix-foreground = ${colors.primary}
+;format-prefix = "TEMP "
 
 ; This module is not active by default (to enable it, add it to one of the
 ; modules-* list above).
@@ -107,17 +97,6 @@ tray-spacing = 16pt
 
 [module/xworkspaces]
 type = internal/xworkspaces
-
-;ws-icon-0 = nogroup;O
-;ws-icon-1 = one;I
-;ws-icon-2 = two;II
-;ws-icon-3 = three;III
-;ws-icon-4 = four;IV
-;ws-icon-5 = five;V
-;ws-icon-6 = six;VI
-;ws-icon-7 = seven;VII
-;ws-icon-8 = eight;VIII
-;ws-icon-9 = nine;IX
 
 label-active = %name%
 label-active-background = ${colors.background-alt}
@@ -176,17 +155,48 @@ label-indicator-background = ${colors.secondary}
 
 [module/memory]
 type = internal/memory
-interval = 2
+i:nterval = 2
 format-prefix = "RAM "
 format-prefix-foreground = ${colors.primary}
 label = %percentage_used:2%%
 
 [module/cpu]
-type = internal/cpu
-interval = 2
-format-prefix = "CPU "
-format-prefix-foreground = ${colors.primary}
-label = %percentage:2%%
+;type = internal/cpu
+;interval = 2
+;format-prefix = "CPU "
+;format-prefix-foreground = ${colors.primary}
+;label = %percentage:2%%
+
+;type = internal/cpu
+;interval = 0.5
+;format = <label> <ramp-coreload>
+;label = CPU
+
+ramp-coreload-0 = ▁
+ramp-coreload-0-font = 2
+ramp-coreload-0-foreground = #aaff77
+ramp-coreload-1 = ▂
+ramp-coreload-1-font = 2
+ramp-coreload-1-foreground = #aaff77
+ramp-coreload-2 = ▃
+ramp-coreload-2-font = 2
+ramp-coreload-2-foreground = #aaff77
+ramp-coreload-3 = ▄
+ramp-coreload-3-font = 2
+ramp-coreload-3-foreground = #aaff77
+ramp-coreload-4 = ▅
+ramp-coreload-4-font = 2
+ramp-coreload-4-foreground = #fba922
+ramp-coreload-5 = ▆
+ramp-coreload-5-font = 2
+ramp-coreload-5-foreground = #fba922
+ramp-coreload-6 = ▇
+ramp-coreload-6-font = 2
+ramp-coreload-6-foreground = #ff5555
+ramp-coreload-7 = █
+ramp-coreload-7-font = 2
+ramp-coreload-7-foreground = #ff5555
+
 
 [network-base]
 type = internal/network
@@ -209,8 +219,8 @@ label-connected = %{F#F0C674}%ifname%%{F-} %local_ip%
 type = internal/date
 interval = 1
 
-date = %l:%M%p
-date-alt = %a %e %b %l:%M%p
+date = %H:%M
+date-alt = %Y-%m-%d %H:%M:%S
 
 label = %date%
 label-foreground = ${colors.primary}

@@ -51,7 +51,7 @@ separator-foreground = ${colors.disabled}
 font-0 = monospace;2
 
 modules-left = xworkspaces xwindow
-modules-right = openbsdbattery sndio memory cpu openbsdtemp date
+modules-right = openbsdbattery pulseaudio memory cpu openbsdtemp date
 ;filesystem pulseaudio xkeyboard memory cpu wlan eth date
 
 cursor-click = pointer
@@ -69,27 +69,17 @@ enable-ipc = true
 [module/openbsdbattery]
 type = custom/script
 exec = $HOME/.config/polybar/script/getbattlevel.sh
-label = %output%%
+label = BAT %output%%
 interval = 60
-format-prefix = "BAT "
-format-prefix-foreground = ${colors.primary}
+;format-prefix = " "
 
 [module/openbsdtemp]
 type = custom/script
 exec = $HOME/.config/polybar/script/getcputemp.sh
 ;sysctl -n hw.sensors.cpu0.temp0 | cut -f 1 -d "."
-label = %output%°C
+label = TEMP %output%C
 interval = 30
-format-prefix = "TEMP "
-format-prefix-foreground = ${colors.primary}
-
-[module/sndio]
-type = custom/script
-exec = $HOME/.config/polybar/script/volume.sh
-label = %output%%
-interval = 10
-format-prefix = "VOL "
-format-prefix-foreground = ${colors.primary}
+;format-prefix = " "
 
 ; This module is not active by default (to enable it, add it to one of the
 ; modules-* list above).
@@ -107,17 +97,6 @@ tray-spacing = 16pt
 
 [module/xworkspaces]
 type = internal/xworkspaces
-
-;ws-icon-0 = nogroup;O
-;ws-icon-1 = one;I
-;ws-icon-2 = two;II
-;ws-icon-3 = three;III
-;ws-icon-4 = four;IV
-;ws-icon-5 = five;V
-;ws-icon-6 = six;VI
-;ws-icon-7 = seven;VII
-;ws-icon-8 = eight;VIII
-;ws-icon-9 = nine;IX
 
 label-active = %name%
 label-active-background = ${colors.background-alt}
@@ -209,8 +188,8 @@ label-connected = %{F#F0C674}%ifname%%{F-} %local_ip%
 type = internal/date
 interval = 1
 
-date = %l:%M%p
-date-alt = %a %e %b %l:%M%p
+date = %H:%M
+date-alt = %Y-%m-%d %H:%M:%S
 
 label = %date%
 label-foreground = ${colors.primary}
