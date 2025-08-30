@@ -35,7 +35,7 @@ borderwidth 3
 
 # set font for menus
 #fontname "mono:pixelsize=16:style=semicondensed"
-fontname "JetBrainsMono:pixelsize=20:medium"
+fontname "JetBrainsMono:pixelsize=16:medium"
 
 
 # remove all default keybindings
@@ -147,6 +147,7 @@ bind-key 4-d 'dmenu_run -fn "Mono:size=10" -nb "#282828" -nf "#ebdbb2" -sb "#1d2
 # mod + Shift + b = Browser (dmenu)
 bind-key 4S-b dmenubrowser
 # mod + Shift + f = Firefox
+bind-key 4S-c = chrome
 bind-key 4S-f firefox
 # mod + Shift + t = Thunderbird
 bind-key 4S-t thunderbird
@@ -199,7 +200,8 @@ autogroup 1 "Navigator,Firefox"
 # these commands will appear in the command menu
 #command display displayselect
 command Terminal kitty
-command "Web Browser" firefox
+command "Web Browser" chrome
+command "Firefox"  firefox
 command "File Managar" thunar
 command "Text Editor"  "kitty -e /usr/local/bin/hx"
 #command emoji dmenuunicode
@@ -212,4 +214,5 @@ command xcalc  xcalc
 #command xfreerdp dmenurdp
 #command kitty kitty
 #command ssh dmenussh
+command Reboot   "doas reboot"
 command Shutdown "doas shutdown -p now"
