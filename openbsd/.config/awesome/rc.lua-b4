@@ -1,0 +1,187 @@
+--[[
+
+     Awesome WM configuration template
+     github.com/lcpz
+
+--]]
+
+-- {{{ Required libraries
+local awesome, client, mouse, screen, tag = awesome, client, mouse, screen, tag
+local ipairs, string, os, table, tostring, tonumber, type = ipairs, string, os, table, tostring, tonumber, type
+
+--https://awesomewm.org/doc/api/documentation/05-awesomerc.md.html
+-- Standard awesome library
+local gears         = require("gears") --Utilities such as color parsing and objects
+local awful         = require("awful") --Everything related to window managment
+                      require("awful.autofocus")
+-- Widget and layout library
+local wibox         = require("wibox")
+
+-- Theme handling library
+local beautiful     = require("beautiful")
+
+-- Notification library
+local naughty       = require("naughty")
+naughty.config.defaults['icon_size'] = 100
+
+--local menubar       = require("menubar")
+
+local lain          = require("lain")
+local freedesktop   = require("freedesktop")
+
+-- Enable hotkeys help widget for VIM and other apps
+-- when client with a matching name is opened:
+local hotkeys_popup = require("awful.hotkeys_popup").widget
+                      require("awful.hotkeys_popup.keys")
+local my_table      = awful.util.table or gears.table -- 4.{0,1} compatibility
+local dpi           = require("beautiful.xresources").apply_dpi
+-- }}}
+
+
+
+-- {{{ Error handling
+-- Check if awesome encountered an error during startup and fell back to
+-- another config (This code will only ever execute for the fallback config)
+if awesome.startup_errors then
+    naughty.notify({ preset = naughty.config.presets.critical,
+                     title = "Oops, there were errors during startup!",
+                     text = awesome.startup_errors })
+end
+
+-- Handle runtime errors after startup
+do
+    local in_error = false
+    awesome.connect_signal("debug::error", function (err)
+        if in_error then return end
+        in_error = true
+
+        naughty.notify({ preset = naughty.config.presets.critical,
+                         title = "Oops, an error happened!",
+                         text = tostring(err) })
+        in_error = false
+    end)
+end
+-- }}}
+
+
+
+-- {{{ Autostart windowless processes
+local function run_once(cmd_arr)
+    for _, cmd in ipairs(cmd_arr) do
+        awful.spawn.with_shell(string.format("pgrep -u $USER -fx '%s' > /dev/null || (%s)", cmd, cmd))
+    end
+end
+run_once({ "unclutter -root" }) -- entries must be comma-separated
+-- }}}
+
+-- This function implements the XDG autostart specification
+--[[
+awful.spawn.with_shell(
+    'if (xrdb -query | grep -q "^awesome\\.started:\\s*true$"); then exit; fi;' ..
+    'xrdb -merge <<< "awesome.started:true";' ..
+    -- list each of your autostart commands, followed by ; inside single quotes, followed by ..
+    'dex --environment Awesome --autostart --search-paths "$XDG_CONFIG_DIRS/autostart:$XDG_CONFIG_HOME/autostart"' -- https://github.com/jceb/dex
+)
+--]]
+
+-- }}}
+
+-- {{{ Variable definitions
+require("configurations.preference")
+require("configurations.keybindings")
+require("configurations.layouts")
+
+
+
+local themes = {
+    "multicolor", 			-- 1
+    "powerarrow",      		-- 2
+    "powerarrow-blue",      -- 3
+
+}
+
+-- choose your theme here
+local chosen_theme = themes[1]
+
+
+beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
+-- }}}
+
+-- {{{ Menu
+local myawesomemenu = {
+    { "hotkeys", function() return false, hotkeys_popup.show_help end },
+    { "manual", string.format("%s -e %s", terminal, "man awesome") },
+    --{ "edit config", 'alacritty -e nvim /home/mansur/.config/awesome/rc.lua' },
+    { "edit config", string.format("%s %s", editorgui , awesome.conffile) },
+    --{ "arandr", "arandr" },
+    { "restart", awesome.restart },
+}
+
+awful.util.mymainmenu = freedesktop.menu.build({
+    before = {
+        { "Awesome", myawesomemenu },
+        --{ "Atom", "atom" },
+        -- other triads can be put here
+    },
+    after = {
+        { "Terminal", terminal },
+        { "Log out", function() awesome.quit() end },
+        { "Sleep", "zzz" },
+        { "Reboot", "doas reboot" },
+        { "Shutdown", "doas shutdown -p now" },
+        -- other triads can be put here
+    }
+})
+-- hide menu when mouse leaves it
+--awful.util.mymainmenu.wibox:connect_signal("mouse::leave", function() awful.util.mymainmenu:hide() end)
+
+--menubar.utils.terminal = terminal -- Set the Menubar terminal for applications that require it
+-- }}}
+
+
+
+-- {{{ Screen
+-- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
+screen.connect_signal("property::geometry", function(s)
+    -- Wallpaper
+    if beautiful.wallpaper then
+        local wallpaper = beautiful.wallpaper
+        -- If wallpaper is a function, call it with the screen
+        if type(wallpaper) == "function" then
+            wallpaper = wallpaper(s)
+        end
+        gears.wallpaper.maximized(wallpaper, s, true)
+    end
+end)
+
+-- No borders when rearranging only 1 non-floating or maximized client
+screen.connect_signal("arrange", function (s)
+    local only_one = #s.tiled_clients == 1
+    for _, c in pairs(s.clients) do
+        if only_one and not c.floating or c.maximized then
+            c.border_width = 2
+        else
+            c.border_width = beautiful.border_width
+        end
+    end
+end)
+-- Create a wibox for each screen and add it
+awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s)
+    s.systray = wibox.widget.systray()
+    s.systray.visible = true
+ end)
+-- }}}
+
+
+require("configurations.rules")
+
+
+
+-- }}}
+
+-- Autostart applications
+--awful.spawn.with_shell("~/.local/bin/autostart.sh")
+awful.spawn("nitrogen --restore")
+--awful.spawn.with_shell([[picom -bi 0.65 --backend glx --shadow-exclude "class_g = 'firefox'" --vsync -f --config  $HOME/.config/awesome/compton.conf]])
+--awful.spawn("picom -b")
+--awful.spawn("xrandr --dpi 96")
