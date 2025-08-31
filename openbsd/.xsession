@@ -1,12 +1,31 @@
-#export GDK_SCALE=2
-export GDK_SCALE=1.75
-export QT_SCALE_FACTOR=1.75
-xrandr --output eDP-1 --mode 2560x1440 #default --dpi 163 #--mode 1856x1392 --dpi 163 
+#!/bin/sh -x
 
-xrdb -merge ~/.Xresources
-#exec /usr/X11R6/bin/cwm
-picom &
-dunst &
-polybar &
+#picom &
+# polybar &
+
+xrdb -merge $HOME/.Xresource
+
+export LANG=en_GB.UTF-8
+export LC_TYPE=en_GB.UTF-8
+#export XMODIFIERS=@im=uim
+#export MOZ_USE_XINPUT2=1
+#export MOZ_ACCELERATED=1
+#export MOZ_WEBRENDER=1
+
+## no bell
+xset b 0 0 0 
+
+## DBus
+if [ -x /usr/local/bin/dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
+  eval `dbus-launch --sh-syntax --exit-with-x11`
+fi
+
+## Termbar
+#exec xterm -fs 12 -bg "black" -fg "grey" -name termbar -class termbar -T termbar -e ~/.local/bin/termbar &
+exec polybar &
+
+## Wallpaper
+#feh --bg-fill ~/.config/backgrounds/shires_charm.png &
+feh --bg-fill ~/.config/backgrounds/sith-cats-star-wars.png &
+
 exec /usr/X11R6/bin/cwm
-#exec /usr/local/bin/startxfce4 --with-ck-launch
