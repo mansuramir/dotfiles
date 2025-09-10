@@ -7,7 +7,7 @@ snapdist 10
 # leave a gap
 #gap 0 0 0 0
 ## gap top bottom left right
-gap 45 10 10 10
+gap 50 10 10 10
 
 ## htile percent
 htile 50
@@ -36,7 +36,7 @@ borderwidth 3
 
 # set font for menus
 #fontname "mono:pixelsize=16:style=semicondensed"
-fontname "JetBrainsMono:pixelsize=16:medium"
+fontname "JetBrainsMono NF:pixelsize=20:medium"
 
 
 # remove all default keybindings
@@ -143,12 +143,13 @@ bind-key 4-slash menu-window
 # mod + r = show popup menu to run a command (configured below)
 bind-key 4-r menu-cmd
 # mod + d = dmenu
-bind-key 4-d 'dmenu_run -fn "Mono:size=8" -nb "#282828" -nf "#ebdbb2" -sb "#1d2021" -sf "#fe8019"'
+#bind-key 4-d 'dmenu_run -fn "Mono:size=8" -nb "#282828" -nf "#ebdbb2" -sb "#1d2021" -sf "#fe8019"'
+bind-key 4-d 'rofi -show drun'
 
 # mod + Shift + b = Browser (dmenu)
 bind-key 4S-b dmenubrowser
 # mod + Shift + f = Firefox
-bind-key 4S-c = chrome
+bind-key 4S-c chrome
 bind-key 4S-f firefox
 # mod + Shift + t = Thunderbird
 bind-key 4S-t thunderbird
@@ -171,8 +172,9 @@ bind-key 4-Print dmenurecord
 ## CWM Session
 # mod + control + R = restart cwm, reloading configuration
 bind-key 4C-r restart
-# mod + shift + Q = log out
-bind-key 4C-q quit
+# mod + shifCCt + Q = log out
+bind-key 4C-q ~/.local/bin/killcwm
+bind-key 4C-q "pkill picom && pkill cwm"
 
 # unbind default mouse actions
 unbind-mouse M-1
@@ -204,7 +206,7 @@ command Terminal kitty
 command "Web Browser" chrome
 command "Firefox"  firefox
 command "File Managar" thunar
-command "Text Editor"  "kitty -e /usr/local/bin/hx"
+command "Text Editor"  "geany"
 #command emoji dmenuunicode
 #command pass dmenupass
 #command rclone dmenurclone
@@ -215,5 +217,6 @@ command xcalc  xcalc
 #command xfreerdp dmenurdp
 #command kitty kitty
 #command ssh dmenussh
+command Logout   "pkill picom && pkill cwm"
 command Reboot   "doas reboot"
 command Shutdown "doas shutdown -p now"
