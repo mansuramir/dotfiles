@@ -1,9 +1,9 @@
 #!/bin/sh -x
 
-#picom &
+picom --config ~/.config/picom/config.msa &
 # polybar &
 
-xrdb -merge $HOME/.Xresource
+xrdb -merge $HOME/.Xresources
 
 export LANG=en_GB.UTF-8
 export LC_TYPE=en_GB.UTF-8
@@ -26,6 +26,7 @@ exec polybar &
 
 ## Wallpaper
 #feh --bg-fill ~/.config/backgrounds/shires_charm.png &
-feh --bg-fill ~/.config/backgrounds/sith-cats-star-wars.png &
+#feh --bg-fill ~/.config/backgrounds/sith-cats-star-wars.png &
+feh --bg-fill ~/minimal.jpg &
 
 exec /usr/X11R6/bin/cwm
