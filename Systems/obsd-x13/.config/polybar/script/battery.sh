@@ -5,13 +5,13 @@ BAT=$(echo "$BAT_INFO" | grep -E -o '[0-9]+%' | head -1)
 BAT_VALUE=${BAT%?}  
 # Remove the '%' sign
 
-FULL_ICON="   "  
+FULL_ICON="󰁹  " #"   "  
 # Full battery
-MEDIUM_ICON="   "  
+MEDIUM_ICON="󰁿  " #"   "  
 # Medium battery
-QUARTER_ICON="   "  
+QUARTER_ICON="󰁼  " #"   "  
 # Quarter battery
-EMPTY_ICON="   "  
+EMPTY_ICON="󰂎  " #"   "  
 # Empty battery
 CHARGING_ICON="󱐋 "  
 # Charging icon
