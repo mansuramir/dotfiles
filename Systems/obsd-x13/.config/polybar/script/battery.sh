@@ -1,24 +1,28 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 
-BAT_INFO=$(acpi -b)
-BAT=$(echo "$BAT_INFO" | grep -E -o '[0-9]+%' | head -1)
-BAT_VALUE=${BAT%?}  
+#BAT_INFO=$(acpi -b)
+#BAT=$(echo "$BAT_INFO" | grep -E -o '[0-9]+%' | head -1)
+#BAT_VALUE=${BAT%?}  
 # Remove the '%' sign
+BAT_VALUE=$(apm -l)
 
-FULL_ICON="󰁹  " #"   "  
+FULL_ICON="󰁹" #"   "  
 # Full battery
-MEDIUM_ICON="󰁿  " #"   "  
+MEDIUM_ICON="󰁿" #"   "  
 # Medium battery
-QUARTER_ICON="󰁼  " #"   "  
+QUARTER_ICON="󰁼" #"   "  
 # Quarter battery
-EMPTY_ICON="󰂎  " #"   "  
+EMPTY_ICON="󰂎" #"   "  
 # Empty battery
-CHARGING_ICON="󱐋 "  
+CHARGING_ICON="󱊦" #"󱐋"  
 # Charging icon
 
-CHARGING_STATUS=$(echo "$BAT_INFO" | grep -o 'Charging')
+foreground="#C5C8C6"
 
-if [ "$CHARGING_STATUS" = "Charging" ]; then
+#CHARGING_STATUS=$(echo "$BAT_INFO" | grep -o 'Charging')
+CHARGING_STATUS=$(apm -a)
+
+if [ "$CHARGING_STATUS" = "1" ]; then
     ICON="$CHARGING_ICON"
     COLOR="#00cccc"
 elif [ "$BAT_VALUE" -gt 80 ]; then
@@ -49,13 +53,17 @@ elif [ "$BAT_VALUE" -le 20 ]; then
 fi
 
 # Full and short texts
-FULL_TEXT=" $ICON $BAT "
-SHORT_TEXT="BAT: $BAT"
+FULL_TEXT="$ICON $BAT_VALUE% "
+#SHORT_TEXT="BAT: $BAT"
 
 # Output
-echo "$FULL_TEXT "
-echo "$SHORT_TEXT "
-echo "$COLOR"
-[ -n "$URGENT" ] && exit "$URGENT"
+#echo "$FULL_TEXT"
+#echo "$SHORT_TEXT "
+echo -n "%{F$COLOR}"
+echo -n "$ICON "
+echo -n "%{F$foreground}"
+echo "$BAT_VALUE%"
+
+#[ -n "$URGENT" ] && exit "$URGENT"
 
 exit 0
