@@ -1,0 +1,3 @@
+#!/bin/sh
+
+piCom --backend glx --vsync -f -b

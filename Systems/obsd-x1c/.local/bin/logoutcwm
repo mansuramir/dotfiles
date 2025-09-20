@@ -1,0 +1,6 @@
+#!/bin/sh
+
+pkill dunst
+pkill picom
+sleep 1
+pkill cwm

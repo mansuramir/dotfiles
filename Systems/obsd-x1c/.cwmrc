@@ -1,0 +1,231 @@
+# automatically add new windows to the current group
+sticky yes
+
+# snap windows to edges at 4 pixels distance
+snapdist 10
+
+# leave a gap
+#gap 0 0 0 0
+## gap top bottom left right
+gap 50 5 5 5
+
+## htile percent
+htile 50
+## vtile percent
+vtile 50
+## movement pixels
+moveamount 10
+
+
+ignore polybar
+ignore rofi
+
+# colors
+#color    inactiveborder  "blue" # #282828"
+color    activeborder "#d6972b"
+##dba953
+#"#e09004"
+#"#5294E2"  
+#fbf1c7"
+color    inactiveborder "#5294E2"
+#"#03428c"
+#"#9dc5f5"
+#"#434853"
+color    groupborder "#52E25F"
+color    font "#FAFFAFA"
+color    selfont "#FAFAFA"
+#color    menubg "#2F34eF"
+color    menubg "#C5C8C6"
+color    menufg #5294E2"
+color    urgencyborder "#E25261"
+color    ungroupborder "#DA52E2"
+borderwidth 3
+
+# set font for menus
+#fontname "mono:pixelsize=16:style=semicondensed"
+fontname "JetBrainsMono NF:pixelsize=18:medium"
+
+
+# remove all default keybindings
+unbind-key all
+
+# KEYBINDINGS:
+# 4 = mod (windows key)
+# S = shift
+# C = control
+# M = meta (alt)
+
+## MSA additions
+#bind-key XF86AUdioMute "sndioctl output.mute=!"
+#bind-key XFAudioRaiseVolume "sndioctl output.level=+0.05"
+
+# mod + enter = new xterm
+bind-key 4-Return kitty #terminal
+# ctrl + alt + L = lock screen (xlock)
+bind-key CM-l xlock
+# mod + backspace = hide window
+bind-key 4-BackSpace window-hide
+# mod + space = change xkb layout
+bind-key 4-space changexkbmap
+
+# mod + down arrow = lower window's focus
+bind-key 4-Down window-lower
+# mod + up arrow = raise window's focus
+bind-key 4-Up window-raise
+# mod/alt + tab = cycle through current windows
+bind-key 4-Tab window-cycle
+bind-key M-Tab window-cycle
+# mod/alt + shift + tab = same thing in reverse
+bind-key 4S-Tab window-rcycle
+bind-key MS-Tab window-rcycle
+# mod + q = quit window
+bind-key 4-q window-close
+# set a window's label
+bind-key 4-n window-menu-label
+
+# mod + $N = show only windows for group $N
+# (you can think of this as switching to virtual desktop $N)
+bind-key 4-1 group-only-1
+bind-key 4-2 group-only-2
+bind-key 4-3 group-only-3
+bind-key 4-4 group-only-4
+bind-key 4-5 group-only-5
+bind-key 4-6 group-only-6
+bind-key 4-7 group-only-7
+bind-key 4-8 group-only-8
+bind-key 4-9 group-only-9
+
+# mod + shift +$N = move window to group $N
+bind-key 4S-1 window-movetogroup-1
+bind-key 4S-2 window-movetogroup-2
+bind-key 4S-3 window-movetogroup-3
+bind-key 4S-4 window-movetogroup-4
+bind-key 4S-5 window-movetogroup-5
+bind-key 4S-6 window-movetogroup-6
+bind-key 4S-7 window-movetogroup-7
+bind-key 4S-8 window-movetogroup-8
+bind-key 4S-9 window-movetogroup-9
+
+# mod + A = toggle showing windows from all groups
+bind-key 4-a group-toggle-all
+# mod + G = toggle current window's group membership
+bind-key 4-g window-group
+
+# mod + right arrow = cycle through the window groups
+# (you can think of this as switching to the next virtual desktop)
+bind-key 4-Right group-cycle
+# mod + left arrow = same thing in reverse
+bind-key 4-Left group-rcycle
+# mod + Shift + S = stick current window to be visible in all groups
+bind-key 4S-s window-stick
+
+# mod + F = make current window fullscreen
+bind-key 4-f window-fullscreen
+# mod + M = maximize current window
+bind-key 4-m window-maximize
+# mod + equals = maximize window in vertical direction only
+bind-key 4-equal window-vmaximize
+# mod + shift + equals = maximize window in horizontal direction only
+bind-key 4S-equal window-hmaximize
+
+# mod + H,J,K,L = move window left, down, up, right 10 pixels
+bind-key 4-h window-move-left-big
+bind-key 4-j window-move-down-big
+bind-key 4-k window-move-up-big
+bind-key 4-l window-move-right-big
+
+# mod + shift + H,J,K,L = resize window left, down, up, right by 10 pixels
+bind-key 4S-h window-resize-left-big
+bind-key 4S-j window-resize-down-big
+bind-key 4S-k window-resize-up-big
+bind-key 4S-l window-resize-right-big
+
+# mod + V = tile windows vertically, current window to the left
+bind-key 4-v window-vtile
+# mod + S = tile windows horizontally, current window to the top
+bind-key 4-s window-htile
+
+# mod + / = show popup menu of current windows
+bind-key 4-slash menu-window
+# mod + r = show popup menu to run a command (configured below)
+bind-key 4-r menu-cmd
+# mod + d = dmenu
+#bind-key 4-d 'dmenu_run -fn "Mono:size=8" -nb "#282828" -nf "#ebdbb2" -sb "#1d2021" -sf "#fe8019"'
+bind-key 4-d 'rofi -show drun -theme /home/mansur/.cwm/theme/rofi/launcher.rasi'
+
+# mod + Shift + b = Browser (dmenu)
+bind-key 4S-b dmenubrowser
+# mod + Shift + f = Firefox
+bind-key 4S-c chrome
+bind-key 4S-f firefox
+# mod + Shift + t = Thunderbird
+bind-key 4S-t thunderbird
+# mod + Shift + x = XFE
+bind-key 4S-x xfe
+
+# mod + u = tmux
+bind-key 4-u 'kitty -g 95x33 tmuxdd'
+# mod + Shift + v = vifm
+bind-key 4S-v 'xterm -g 95x33 vifm'
+# mod + shift + o = Open file
+bind-key 4S-o openfile
+
+# Screenshot + Screencast
+bind-key Print "screenpng pics/screenshots/"
+bind-key 4S-Print "screenpng -s pics/screenshots/"
+bind-key 4-Print dmenurecord
+
+
+## CWM Session
+# mod + control + R = restart cwm, reloading configuration
+bind-key 4C-r restart
+# mod + shifCCt + Q = log out
+#bind-key 4C-q ~/.local/bin/killcwm
+bind-key 4C-q "pkill picom && pkill cwm"
+bind-key 4-x "/home/mansur/.cwm/scripts/rofi_powermenu"
+
+# unbind default mouse actions
+unbind-mouse M-1
+unbind-mouse CM-1
+unbind-mouse M-2
+unbind-mouse M-3
+unbind-mouse CMS-3
+
+# mod + left click drag = move window
+bind-mouse 4-1 window-move
+# mod + right click drag = resize window
+bind-mouse 4-3 window-resize
+# mod + middle click = lower window's focus
+bind-mouse 4-2 window-lower
+# mod + shift + middle click = hide window
+bind-mouse 4S-2 window-hide
+
+# media buttons
+#bind XF86AudioRaiseVolume "mixer vol +5"
+#bind XF86AudioLowerVolume "mixer vol -5"
+#bind XF86WWW "xterm"
+
+# Autogroup definitions
+autogroup 1 "Navigator,Firefox"
+
+# these commands will appear in the command menu
+#command display displayselect
+command Terminal kitty
+command "Web Browser" firefox
+command "Chrome"  chrome
+command "File Managar" thunar
+command "Text Editor"  "geany"
+#command emoji dmenuunicode
+#command pass dmenupass
+#command rclone dmenurclone
+#command networking dmenunet
+#command webcam webcam
+command xcalc  xcalc
+#command xfe  xfe
+#command xfreerdp dmenurdp
+#command kitty kitty
+#command ssh dmenussh
+#command Logout   "pkill picom && pkill dunst && sleep 1 && pkill cwm"
+command Logout "/home/mansur/.local/bin/logoutcwm"
+command Reboot   "doas reboot"
+command Shutdown "doas shutdown -p now"

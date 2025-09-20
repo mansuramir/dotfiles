@@ -1,0 +1,7 @@
+#!/bin/sh
+
+#pkill polybar
+pkill picom
+#sleep 1
+pkill cwm
+#doas pkill X
