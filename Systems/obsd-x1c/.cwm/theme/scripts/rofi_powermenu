@@ -1,15 +1,16 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 
 ## Copyright (C) 2020-2024 Aditya Shakya <adi1090x@gmail.com>
 
 # Import Current Theme
-DIR="$HOME/.cwm
+DIR="$HOME/Downloads/archcraft"
 RASI="$DIR/theme/rofi/powermenu.rasi"
 CNFR="$DIR/theme/rofi/confirm.rasi"
 
 # Theme Elements
 prompt="`hostname` (`echo $DESKTOP_SESSION`)"
-mesg="Uptime : `uptime -p | sed -e 's/up //g'`"
+#mesg="Uptime : `uptime -p | sed -e 's/up //g'`"
+mesg="Uptime : `uptime | cut -f5 -d' '` minutes"
 
 # Options
 layout=`cat ${RASI} | grep 'USE_ICON' | cut -d'=' -f2`
@@ -39,7 +40,7 @@ fi
 
 # Rofi CMD
 rofi_cmd() {
-	rofi -dmenu -show-icons \
+	rofi -dmenu \
 		-p "$prompt" \
 		-mesg "$mesg" \
 		-markup-rows \
@@ -79,17 +80,20 @@ confirm_run () {
 # Execute Command
 run_cmd() {
 	if [[ "$1" == '--opt1' ]]; then
-		betterlockscreen --lock
+		confirm_run 'xlock'
 	elif [[ "$1" == '--opt2' ]]; then
-		confirm_run 'kill -9 -1'
+		#confirm_run 'kill -9 -1'
+		confirm_run '/home/mansur/.local/bin/logoutcwm'
 	elif [[ "$1" == '--opt3' ]]; then
-		confirm_run 'mpc -q pause' 'pulsemixer --mute' 'betterlockscreen --suspend'
+		#confirm_run 'mpc -q pause' 'pulsemixer --mute' 'betterlockscreen --suspend'
+		confirm_run 'zzz'
 	elif [[ "$1" == '--opt4' ]]; then
-		confirm_run 'systemctl hibernate'
+		#confirm_run 'systemctl hibernate'
+		confirm_run 'ZZZ'
 	elif [[ "$1" == '--opt5' ]]; then
-		confirm_run 'systemctl reboot'
+		confirm_run 'doas reboot'
 	elif [[ "$1" == '--opt6' ]]; then
-		confirm_run 'systemctl poweroff'
+		confirm_run 'doas shutdown -p now'
 	fi
 }
 

@@ -10,7 +10,7 @@ CNFR="$DIR/theme/rofi/confirm.rasi"
 # Theme Elements
 prompt="`hostname` (`echo $DESKTOP_SESSION`)"
 #mesg="Uptime : `uptime -p | sed -e 's/up //g'`"
-mesg="Uptime : `uptime | cut -f5 -d' '` minutes"
+mesg="Uptime : `uptime | cut -f6 -d' ' | cut -f1 -d':'` minutes"
 
 # Options
 layout=`cat ${RASI} | grep 'USE_ICON' | cut -d'=' -f2`
