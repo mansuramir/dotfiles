@@ -36,7 +36,7 @@ color    font "#FAFFAFA"
 color    selfont "#FAFAFA"
 #color    menubg "#2F34eF"
 color    menubg "#C5C8C6"
-color    menufg #5294E2"
+color    menufg "#5294E2"
 color    urgencyborder "#E25261"
 color    ungroupborder "#DA52E2"
 borderwidth 3

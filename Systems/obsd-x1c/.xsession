@@ -25,8 +25,8 @@ fi
 exec polybar &
 
 ## Wallpaper
-#feh --bg-fill ~/.config/backgrounds/shires_charm.png &
+feh --bg-fill ~/.config/backgrounds/minimalist_sunset.jpg &
 #feh --bg-fill ~/.config/backgrounds/sith-cats-star-wars.png &
-feh --bg-fill ~/minimal.jpg &
+#feh --bg-fill ~/minimal.jpg &
 
 exec /usr/X11R6/bin/cwm

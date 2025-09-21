@@ -38,11 +38,15 @@ if [ "$CHARGING_STATUS" = "1" ]; then
         ICON="$C_MEDIUM_ICON"
         COLOR="#00cccc"  
     # Purple color
-    elif [ "$BAT_VALUE" -gt 35 ] && [ "$BAT_VALUE" -le 60 ]; then
-        ICON="$C_QUARTER_ICON"
-        COLOR="#cc0088"  
+    elif [ "$BAT_VALUE" -gt 50 ] && [ "$BAT_VALUE" -le 60 ]; then
+        ICON="$C_MEDIUM_ICON"
+        COLOR="#00cccc"  
+    # Purple color
+    elif [ "$BAT_VALUE" -gt 40 ] && [ "$BAT_VALUE" -le 50 ]; then
+        ICON="$C_MEDIUM_ICON"
+        COLOR="#00cccc"  
     # Warning color
-    elif [ "$BAT_VALUE" -gt 20 ] && [ "$BAT_VALUE" -le 35 ]; then
+    elif [ "$BAT_VALUE" -gt 20 ] && [ "$BAT_VALUE" -le 40 ]; then
         ICON="$C_QUARTER_ICON"
         COLOR="#cc0022"  
     # Red-ish color
@@ -69,11 +73,15 @@ elif [ "$CHARGING_STATUS" = "0" ]; then
         ICON="$MEDIUM_ICON"
         COLOR="#00cccc"  
     # Purple color
-    elif [ "$BAT_VALUE" -gt 35 ] && [ "$BAT_VALUE" -le 60 ]; then
-        ICON="$QUARTER_ICON"
-        COLOR="#cc0088"  
+    elif [ "$BAT_VALUE" -gt 50 ] && [ "$BAT_VALUE" -le 60 ]; then
+        ICON="$MEDIUM_ICON"
+        COLOR="#00cccc"  
     # Warning color
-    elif [ "$BAT_VALUE" -gt 20 ] && [ "$BAT_VALUE" -le 35 ]; then
+    elif [ "$BAT_VALUE" -gt 40 ] && [ "$BAT_VALUE" -le 50 ]; then
+        ICON="$MEDIUM_ICON"
+        COLOR="#00cccc"  
+    # Warning color
+    elif [ "$BAT_VALUE" -gt 20 ] && [ "$BAT_VALUE" -le 40 ]; then
         ICON="$QUARTER_ICON"
         COLOR="#cc0022"  
     # Red-ish color
