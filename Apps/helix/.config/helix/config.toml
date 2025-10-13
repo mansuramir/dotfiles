@@ -1,15 +1,59 @@
 theme = "catppuccin_macchiato"
 
+
+#### EDITOR CONFIGS ####
+
 [editor]
-bufferline = "multiple"
-true-color = true
 line-number = "relative"
+mouse = true
+rulers = [120]
+true-color = true
+completion-replace = true
+trim-trailing-whitespace = true
+end-of-line-diagnostics = "hint"
+color-modes = true
+#rainbow-brackets = true
 insert-final-newline = false
+bufferline = "multiple"
+
+[editor.inline-diagnostics]
+cursor-line = "warning"
+
+[editor.soft-wrap]
+enable = false
+
+[editor.auto-save]
+focus-lost  = true
+after-delay.enable = true
+after-delay.timeout = 300000
 
 [editor.statusline]
-left = ["mode", "spinner", "version-control", "file-name", "read-only-indicator", "file-modification-indicator"]
-right = ["diagnostics", "selections", "register", "position", "position-percentage", "file-encoding", "file-line-ending"]
-separator = "╎"
+left = [
+  "mode",
+  "spinner",
+  "version-control",
+  "spacer",
+  "separator",
+  "file-name",
+  "read-only-indicator",
+  "file-modification-indicator",
+
+]
+center = []
+right = [
+  "diagnostics",
+  "workspace-diagnostics",
+  "position",
+  "total-line-numbers",
+  "position-percentage",
+  "file-encoding",
+  "file-line-ending",
+  "file-type",
+  "register",
+  "selections",
+]
+separator = "│"
+
 mode.normal = "NORMAL"
 mode.insert = "INSERT"
 mode.select = "SELECT"
@@ -22,9 +66,11 @@ select = "underline"
 [editor.indent-guides]
 character = "│"
 render = true
+skip-levels = 0
 
 [editor.file-picker]
 git-ignore = false
+hidden = false
 
 [editor.lsp]
 auto-signature-help = false
@@ -32,7 +78,30 @@ display-messages = true
 display-inlay-hints = true
 # allow shift+x to reduce the size of an x selection
 
+
+
+##### KEYS BINDINGS #####
+
+[keys.select]
+0 = "goto_line_start"
+"$" = "goto_line_end"
+"^" = "goto_first_nonwhitespace"
+G = "goto_file_end"
+D = ["extend_to_line_bounds", "delete_selection", "normal_mode"]
+k = ["extend_line_up", "extend_to_line_bounds"]
+j = ["extend_line_down", "extend_to_line_bounds"]
+A-x = "extend_to_line_bounds"
+X = ["extend_line_up", "extend_to_line_bounds"]
+
+
 [keys.normal]
+D = ["ensure_selections_forward", "extend_to_line_end", "delete_selection"]
+0 = "goto_line_start"
+"$" = "goto_line_end"
+"^" = "goto_first_nonwhitespace"
+G = "goto_file_end"
+V = ["select_mode", "extend_to_line_bounds"]
+esc = ["collapse_selection", "keep_primary_selection"]
 A-x = "extend_to_line_bounds"
 X = ["extend_line_up", "extend_to_line_bounds"]
 
@@ -45,8 +114,8 @@ S-down = "extend_line_down"
 "#" = "toggle_comments"
 C-c = "no_op"
 q = { q = "wclose" }
-"space" = { "space" = "keep_primary_selection",  "q" = ":buffer-close" }
-"esc" = [ "normal_mode", ":format" , ":write" ] # For quick saving
+#"space" = { "space" = "keep_primary_selection"} # "q" = ":buffer-close" }
+#"esc" = [ "normal_mode", ":format" , ":write" ] # For quick saving
 
 A-o = "add_newline_below"
 A-O = [ "open_above", "normal_mode" ] # Doesn't work.
@@ -58,9 +127,27 @@ C-right = [ "move_next_word_start", "move_char_left", "move_char_right" ]
 "ret" = ":write"
 "C-q" = ":quit!"
 
-[keys.select]
-A-x = "extend_to_line_bounds"
-X = ["extend_line_up", "extend_to_line_bounds"]
+[keys.normal.space]
+e = { w = ":write", c = ":bc", x = ":bco", l = ":toggle lsp.display-inlay-hints" }
+q = ":quit"
+
+[keys.normal."+"]
+f = ":format"
+w = ":toggle whitespace.render all"
+W = ":set whitespace.render none"
+s = ":toggle soft-wrap.enable"
+
+[keys.normal.space.f]
+f = "file_picker_in_current_directory"
+F = "file_picker"
+b = "file_picker_in_current_buffer_directory"
+"." = ":toggle-option file-picker.git-ignore"
+g = "global_search"
+e = "file_explorer"
+r = ":reload-all"
+x = ":reset-diff-change"
+w = ":echo %sh{git blame -L %{cursor_line},+1 %{buffer_name}}"
+
 
 [keys.insert]
 C-backspace = "delete_word_backward"
