@@ -5,7 +5,7 @@ args = ["--stdio"]
 [[language]]
 name = "go"
 auto-format = true
-language-servers = [ "gopls, "harper-ls" ]
+language-servers = [ "gopls", "harper-ls" ]
 formatter = { command = "goimports" }
 
 [[language]]
