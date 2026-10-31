@@ -194,8 +194,10 @@ eval "$(starship init zsh)"
 
 
 ### ROC Nightly
-export PATH=$PATH:$HOME/.local/share/roc/roc_nightly
+##export PATH=$PATH:$HOME/.local/share/roc/roc_nightly
 
+### Doom Emacs
+export PATH=$PATH:$HOME/.config/emacs/bin
 
 ### include alias file
 source $HOME/.config/zsh/.zshalias
