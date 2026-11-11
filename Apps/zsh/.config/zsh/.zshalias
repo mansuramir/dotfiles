@@ -26,3 +26,6 @@ alias gitad="git add ."
 ### yay
 alias yup="yay --noconfirm -Syyuu"
 alias yin="yay --noconfirm -S"
+
+### taskwarrior
+alias tt=taskwarrior-tui
